@@ -238,7 +238,7 @@
 
     <!-- Presentation Main Viewport -->
     <main
-      class="flex-1 relative overflow-y-auto overflow-x-hidden ambient-radial flex items-center justify-center p-3 md:p-6"
+      class="flex-1 relative overflow-y-auto overflow-x-hidden ambient-radial flex items-start md:items-center justify-center p-3 md:p-6"
     >
       <!-- ================= SLIDE 1: PORTADA ================= -->
       <section
@@ -539,7 +539,7 @@
           >
             <div class="w-16 h-1 rounded-full bg-slate-700 mx-auto mb-4"></div>
             <div
-              class="relative rounded-xl overflow-hidden border border-brand-gold/30 bg-black/60 aspect-[9/16] max-h-[320px] mx-auto flex items-center justify-center group cursor-pointer"
+              class="relative rounded-xl overflow-hidden border border-brand-gold/30 bg-black/60 aspect-video max-h-[320px] mx-auto flex items-center justify-center group cursor-pointer"
               onclick="openFeatureModal('reserva')"
             >
               <video
@@ -547,7 +547,7 @@
                 loop
                 muted
                 playsinline
-                class="w-full h-full object-cover"
+                class="w-full h-full object-contain pointer-events-none"
                 onerror="
                   this.style.display = 'none';
                   this.nextElementSibling.style.display = 'flex';
@@ -1809,6 +1809,17 @@
             `;
 
         document.getElementById("feature-modal").classList.remove("hidden");
+
+        // Forzar el arranque del video insertado dinámicamente: en algunos
+        // navegadores móviles (Safari/iOS en particular) un <video> agregado
+        // vía innerHTML no siempre autoplay-ea solo aunque tenga el atributo
+        // autoplay -- llamar a .play() explícitamente, en el mismo gesto de
+        // touch que abrió el modal, lo garantiza.
+        const insertedVideo = container.querySelector("video");
+        if (insertedVideo) {
+          insertedVideo.muted = true;
+          insertedVideo.play().catch(() => {});
+        }
       }
 
       function closeFeatureModal() {
