@@ -1,0 +1,2046 @@
+<!doctype html>
+<html lang="es" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgenZa — Dossier Comercial & Propuesta de Implementación</title>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                gold: "#D4AF37",
+                goldLight: "#F3E5AB",
+                goldDark: "#9A7B1C",
+                dark: "#090A0E",
+                card: "#12141C",
+                cardHover: "#181A25",
+                border: "rgba(212, 175, 55, 0.18)",
+                muted: "#94A3B8",
+              },
+            },
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', "sans-serif"],
+              display: ['"Space Grotesk"', "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Custom scrollbar and slide transitions */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #090a0e;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(212, 175, 55, 0.3);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(212, 175, 55, 0.6);
+      }
+
+      .gold-gradient-text {
+        background: linear-gradient(
+          135deg,
+          #fff0c2 0%,
+          #e5c158 35%,
+          #d4af37 60%,
+          #9a7b1c 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .chrome-gradient-text {
+        background: linear-gradient(
+          180deg,
+          #ffffff 0%,
+          #d1d5db 45%,
+          #9ca3af 55%,
+          #e5e7eb 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .gold-border-glow {
+        border: 1px solid rgba(212, 175, 55, 0.28);
+        box-shadow: 0 0 25px rgba(212, 175, 55, 0.08);
+      }
+
+      .gold-border-glow:hover {
+        border-color: rgba(212, 175, 55, 0.65);
+        box-shadow: 0 0 35px rgba(212, 175, 55, 0.16);
+      }
+
+      .slide-panel {
+        display: none;
+        opacity: 0;
+        transform: translateY(12px);
+        transition:
+          opacity 0.35s ease-out,
+          transform 0.35s ease-out;
+      }
+
+      .slide-panel.active {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Ambient background glow */
+      .ambient-radial {
+        background: radial-gradient(
+          circle at 50% 20%,
+          rgba(212, 175, 55, 0.09) 0%,
+          rgba(9, 10, 14, 0) 70%
+        );
+      }
+    </style>
+  </head>
+  <body
+    class="bg-[#090A0E] text-slate-100 font-sans h-full overflow-hidden flex flex-col select-none"
+  >
+    <!-- Top Header Navigation Bar -->
+    <header
+      class="w-full bg-[#0D0F17]/90 backdrop-blur-md border-b border-brand-border px-4 md:px-8 py-3.5 flex items-center justify-between z-30 shrink-0"
+    >
+      <div class="flex items-center gap-3">
+        <!-- Emblema oficial en el Header -->
+        <div
+          class="relative w-9 h-9 rounded-xl bg-gradient-to-b from-[#1E202B] to-[#0A0B10] border border-brand-gold/40 flex items-center justify-center p-1 shadow-lg shadow-brand-gold/15 overflow-hidden"
+        >
+          <img
+            src="lgo-removebg-preview.png"
+            alt="AgenZa Emblema"
+            class="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]"
+            onerror="
+              this.style.display = 'none';
+              this.nextElementSibling.style.display = 'block';
+            "
+          />
+          <svg
+            viewBox="0 0 100 100"
+            class="w-6 h-6 hidden"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="50"
+              cy="50"
+              r="38"
+              stroke="#D4AF37"
+              stroke-width="3"
+              stroke-dasharray="4 6"
+            />
+            <line
+              x1="50"
+              y1="50"
+              x2="50"
+              y2="30"
+              stroke="#F3E5AB"
+              stroke-width="3"
+              stroke-linecap="round"
+            />
+            <line
+              x1="50"
+              y1="50"
+              x2="65"
+              y2="50"
+              stroke="#F3E5AB"
+              stroke-width="3"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+        <div class="flex items-center">
+          <!-- Logotipo tipográfico oficial -->
+          <img
+            src="logoagenza-removebg-preview.png"
+            alt="AgenZa"
+            class="h-6 sm:h-7 object-contain"
+            onerror="
+              this.style.display = 'none';
+              this.nextElementSibling.style.display = 'inline-block';
+            "
+          />
+          <span class="font-display font-bold text-lg tracking-wider hidden">
+            <span class="chrome-gradient-text font-black">Agen</span
+            ><span class="gold-gradient-text font-black">Z</span
+            ><span class="chrome-gradient-text font-black">a</span>
+          </span>
+          <span
+            class="hidden sm:inline-block ml-3 text-xs uppercase px-2 py-0.5 rounded-full bg-brand-gold/10 text-brand-gold font-medium border border-brand-gold/30"
+            >Dossier Comercial</span
+          >
+        </div>
+      </div>
+
+      <!-- Central Progress Indicator -->
+      <div class="flex items-center gap-3">
+        <div class="text-xs font-semibold text-brand-muted">
+          <span id="current-slide-num" class="text-brand-gold font-bold text-sm"
+            >1</span
+          >
+          / <span id="total-slides-num">8</span>
+        </div>
+        <div
+          class="hidden md:flex w-32 h-1.5 bg-gray-800 rounded-full overflow-hidden"
+        >
+          <div
+            id="progress-bar"
+            class="h-full bg-gradient-to-r from-brand-gold to-brand-goldLight transition-all duration-300"
+            style="width: 12.5%"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Quick Actions & CTA -->
+      <div class="flex items-center gap-2 md:gap-3">
+        <button
+          id="toggle-list-btn"
+          title="Ver índice de diapositivas"
+          class="px-3 py-1.5 rounded-lg border border-brand-border bg-brand-card hover:bg-brand-cardHover text-xs font-medium text-slate-300 transition flex items-center gap-1.5"
+        >
+          <i class="fa-solid fa-list-ul text-brand-gold"></i>
+          <span class="hidden sm:inline">Índice</span>
+        </button>
+        <a
+          id="header-whatsapp-cta"
+          href="https://wa.me/5493518553366?text=Hola%20AgenZa,%20revis%C3%A9%20el%20dossier%20comercial%20y%20quiero%20coordinar%20el%20inicio%20de%20mi%20plataforma"
+          target="_blank"
+          class="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-brand-gold to-brand-goldDark text-black font-bold text-xs hover:brightness-110 shadow-md shadow-brand-gold/20 flex items-center gap-1.5 transition"
+        >
+          <i class="fa-brands fa-whatsapp text-sm"></i>
+          <span>Hablar por WhatsApp</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Presentation Main Viewport -->
+    <main
+      class="flex-1 relative overflow-y-auto overflow-x-hidden ambient-radial flex items-center justify-center p-3 md:p-6"
+    >
+      <!-- ================= SLIDE 1: PORTADA ================= -->
+      <section
+        class="slide-panel active flex-col justify-center items-center text-center max-w-4xl w-full mx-auto py-8"
+      >
+        <div class="relative mb-6 flex flex-col items-center">
+          <!-- Emblema 3D Reloj "A" con Resplandor Dorado -->
+          <div
+            class="relative w-28 h-28 sm:w-36 sm:h-36 rounded-3xl bg-gradient-to-b from-[#1C1E2A] to-[#0A0B10] border border-brand-gold/50 flex items-center justify-center p-3 shadow-2xl shadow-brand-gold/25 group transition-transform duration-300 hover:scale-105"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-tr from-brand-gold/15 via-transparent to-brand-gold/20 rounded-3xl pointer-events-none"
+            ></div>
+            <img
+              src="lgo-removebg-preview.png"
+              alt="AgenZa Icon"
+              class="w-full h-full object-contain filter drop-shadow-[0_8px_20px_rgba(212,175,55,0.45)] relative z-10"
+              onerror="
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'block';
+              "
+            />
+            <svg
+              viewBox="0 0 100 100"
+              class="w-16 h-16 sm:w-20 sm:h-20 hidden"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="50"
+                cy="50"
+                r="38"
+                stroke="#D4AF37"
+                stroke-width="3"
+                stroke-dasharray="3 5"
+              />
+              <line
+                x1="50"
+                y1="50"
+                x2="50"
+                y2="28"
+                stroke="#FFF3D1"
+                stroke-width="3.5"
+                stroke-linecap="round"
+              />
+              <line
+                x1="50"
+                y1="50"
+                x2="67"
+                y2="50"
+                stroke="#FFF3D1"
+                stroke-width="3"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+
+          <!-- Logotipo Tipográfico 3D Cromo & Oro -->
+          <div class="mt-4 flex items-center justify-center">
+            <img
+              src="logoagenza-removebg-preview.png"
+              alt="AgenZa"
+              class="h-16 sm:h-20 md:h-24 object-contain filter drop-shadow-[0_4px_16px_rgba(212,175,55,0.3)]"
+              onerror="
+                this.style.display = 'none';
+                this.nextElementSibling.style.display = 'flex';
+              "
+            />
+            <div
+              class="hidden items-center gap-1.5 text-3xl sm:text-4xl font-extrabold tracking-tight"
+            >
+              <span class="chrome-gradient-text tracking-normal">Agen</span
+              ><span class="gold-gradient-text">Z</span
+              ><span class="chrome-gradient-text tracking-normal">a</span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/30 text-brand-gold text-xs font-semibold uppercase tracking-wider mb-4"
+        >
+          <i class="fa-solid fa-sparkles"></i>
+          Ecosistema Digital Especializado para Salones
+        </div>
+
+        <h1
+          class="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight font-display text-white mb-4 leading-tight"
+        >
+          El Futuro de tu Negocio <br />
+          <span class="gold-gradient-text">Empieza en Automático</span>
+        </h1>
+
+        <p
+          class="text-sm sm:text-base md:text-lg text-slate-300 max-w-2xl mx-auto mb-8 font-normal leading-relaxed"
+        >
+          Automatizá tus turnos 24/7, eliminá los errores de libreta y recuperá
+          el control total de tu caja, equipo y comisiones con una plataforma
+          diseñada a la medida de tu marca.
+        </p>
+
+        <!-- Key Feature Badges Grid -->
+        <div
+          class="grid grid-cols-2 sm:grid-cols-4 gap-3 w-full max-w-3xl mb-8"
+        >
+          <div
+            class="bg-brand-card p-3.5 rounded-xl border border-brand-border text-center"
+          >
+            <i class="fa-solid fa-clock text-brand-gold text-xl mb-1.5"></i>
+            <p class="text-[11px] text-brand-muted uppercase font-semibold">
+              Reservas
+            </p>
+            <p class="text-xs sm:text-sm font-bold text-white">
+              24/7 en 10 segs
+            </p>
+          </div>
+          <div
+            class="bg-brand-card p-3.5 rounded-xl border border-brand-border text-center"
+          >
+            <i
+              class="fa-solid fa-calculator text-brand-gold text-xl mb-1.5"
+            ></i>
+            <p class="text-[11px] text-brand-muted uppercase font-semibold">
+              Comisiones
+            </p>
+            <p class="text-xs sm:text-sm font-bold text-white">
+              Cálculo 1-Click
+            </p>
+          </div>
+          <div
+            class="bg-brand-card p-3.5 rounded-xl border border-brand-border text-center"
+          >
+            <i
+              class="fa-solid fa-envelope-circle-check text-brand-gold text-xl mb-1.5"
+            ></i>
+            <p class="text-[11px] text-brand-muted uppercase font-semibold">
+              Recordatorios
+            </p>
+            <p class="text-xs sm:text-sm font-bold text-white">
+              Vía Email / Auto
+            </p>
+          </div>
+          <div
+            class="bg-brand-card p-3.5 rounded-xl border border-brand-border text-center"
+          >
+            <i
+              class="fa-solid fa-handshake-simple text-brand-gold text-xl mb-1.5"
+            ></i>
+            <p class="text-[11px] text-brand-muted uppercase font-semibold">
+              Entrega
+            </p>
+            <p class="text-xs sm:text-sm font-bold text-white">
+              2 Pruebas en Vivo
+            </p>
+          </div>
+        </div>
+
+        <button
+          onclick="goToSlide(1)"
+          class="px-7 py-3 rounded-xl bg-gradient-to-r from-brand-gold to-brand-goldDark text-black font-extrabold text-sm hover:brightness-110 transition-all duration-200 shadow-lg shadow-brand-gold/25 flex items-center gap-2"
+        >
+          <span>Explorar Propuesta Completa</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </section>
+
+      <!-- ================= SLIDE 2: EL DIAGNÓSTICO OPERATIVO ================= -->
+      <section class="slide-panel flex-col max-w-5xl w-full mx-auto py-4">
+        <div class="text-center mb-6">
+          <span
+            class="text-xs uppercase font-bold tracking-widest text-brand-gold"
+            >El Diagnóstico</span
+          >
+          <h2
+            class="text-2xl sm:text-4xl font-bold font-display text-white mt-1"
+          >
+            ¿Cuánto tiempo y dinero pierde tu local al mes?
+          </h2>
+          <p class="text-sm text-brand-muted max-w-xl mx-auto mt-2">
+            Gestionar con libreta, WhatsApp o notas genera 4 fugas críticas en
+            tu negocio:
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-auto">
+          <div
+            class="bg-brand-card p-5 rounded-2xl gold-border-glow transition flex gap-4 items-start"
+          >
+            <div
+              class="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/30 flex items-center justify-center shrink-0 text-red-400 text-xl font-bold"
+            >
+              <i class="fa-solid fa-scissors"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-white mb-1">
+                1. Interrupciones en pleno servicio
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Pausar la máquina o tijera para contestar WhatsApp, consultar si
+                quedan turnos libres y perder foco en el cliente actual.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="bg-brand-card p-5 rounded-2xl gold-border-glow transition flex gap-4 items-start"
+          >
+            <div
+              class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center shrink-0 text-amber-400 text-xl font-bold"
+            >
+              <i class="fa-solid fa-calendar-xmark"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-white mb-1">
+                2. Superposición de turnos
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Anotar citas a mano y convocar a dos clientes en el mismo
+                horario por un error humano, dañando la imagen del local.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="bg-brand-card p-5 rounded-2xl gold-border-glow transition flex gap-4 items-start"
+          >
+            <div
+              class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center shrink-0 text-purple-400 text-xl font-bold"
+            >
+              <i class="fa-solid fa-user-slash"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-white mb-1">
+                3. Turnos caídos sin aviso (No-shows)
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Clientes que olvidan su horario y dejan el sillón vacío durante
+                franjas pico, generando un costo irrecuperable por hora.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="bg-brand-card p-5 rounded-2xl gold-border-glow transition flex gap-4 items-start"
+          >
+            <div
+              class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center shrink-0 text-blue-400 text-xl font-bold"
+            >
+              <i class="fa-solid fa-calculator"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-bold text-white mb-1">
+                4. Cierres de caja y cálculos interminables
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                Pasar horas sumando tickets de papel y sacando porcentajes de
+                comisiones con calculadora al cerrar la semana.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="mt-6 p-4 rounded-xl bg-gradient-to-r from-brand-gold/15 via-brand-gold/5 to-transparent border border-brand-gold/30 text-center"
+        >
+          <p class="text-xs sm:text-sm font-semibold text-brand-goldLight">
+            💡
+            <strong class="text-white"
+              >AgenZa automatiza la operación completa</strong
+            >
+            para que tu energía esté 100% en atender clientes y facturar.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================= SLIDE 3: LA EXPERIENCIA DEL CLIENTE ================= -->
+      <section class="slide-panel flex-col max-w-5xl w-full mx-auto py-4">
+        <div class="text-center mb-6">
+          <span
+            class="text-xs uppercase font-bold tracking-widest text-brand-gold"
+            >Experiencia del Cliente</span
+          >
+          <h2
+            class="text-2xl sm:text-4xl font-bold font-display text-white mt-1"
+          >
+            Tu local abierto a reservas las 24 hs
+          </h2>
+          <p class="text-sm text-brand-muted max-w-xl mx-auto mt-1">
+            Tu propia página web personalizada, lista para poner en la bio de
+            Instagram y WhatsApp.
+          </p>
+        </div>
+
+        <div
+          class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center my-auto"
+        >
+          <div
+            class="lg:col-span-5 bg-gradient-to-b from-[#161822] to-[#0E1018] p-5 rounded-2xl border border-brand-border text-center shadow-xl"
+          >
+            <div class="w-16 h-1 rounded-full bg-slate-700 mx-auto mb-4"></div>
+            <div
+              class="relative rounded-xl overflow-hidden border border-brand-gold/30 bg-black/60 aspect-[9/16] max-h-[320px] mx-auto flex items-center justify-center group cursor-pointer"
+              onclick="openFeatureModal('reserva')"
+            >
+              <video
+                autoplay
+                loop
+                muted
+                playsinline
+                class="w-full h-full object-cover"
+                onerror="
+                  this.style.display = 'none';
+                  this.nextElementSibling.style.display = 'flex';
+                "
+              >
+                <source src="videos/reserva.mp4" type="video/mp4" />
+              </video>
+              <div
+                class="hidden absolute inset-0 flex-col items-center justify-center p-3 text-center bg-black/80"
+              >
+                <i
+                  class="fa-solid fa-mobile-screen text-3xl text-brand-gold mb-2"
+                ></i>
+                <p class="font-bold text-xs text-white">Web de Reservas 24/7</p>
+                <span class="text-[10px] text-brand-gold mt-1"
+                  >Toca para ver demo</span
+                >
+              </div>
+              <div
+                class="absolute bottom-2 inset-x-2 py-1 bg-black/70 backdrop-blur-md rounded-lg text-[10px] text-brand-gold font-bold flex items-center justify-center gap-1"
+              >
+                <i class="fa-solid fa-play text-[8px]"></i> Ver flujo de reserva
+                en vivo
+              </div>
+            </div>
+            <p class="font-display font-bold text-white text-sm mt-3">
+              Portal Web de tu Local
+            </p>
+            <p class="text-[11px] text-brand-muted">tu-negocio.agenza.pro</p>
+          </div>
+
+          <div class="lg:col-span-7 space-y-3.5">
+            <div
+              class="bg-brand-card p-4 rounded-xl border border-brand-border"
+            >
+              <div
+                class="flex items-center gap-2.5 text-white font-bold text-sm mb-1"
+              >
+                <i class="fa-solid fa-bolt text-brand-gold"></i>
+                <h4>Reserva autónoma en 10 segundos</h4>
+              </div>
+              <p class="text-xs text-slate-300">
+                El cliente elige su barbero favorito, servicio, día y horario
+                sin depender de que vos estés mirando el teléfono.
+              </p>
+            </div>
+
+            <div
+              class="bg-brand-card p-4 rounded-xl border border-brand-border"
+            >
+              <div
+                class="flex items-center gap-2.5 text-white font-bold text-sm mb-1"
+              >
+                <i class="fa-solid fa-circle-check text-brand-gold"></i>
+                <h4>Cero descargas ni registros pesados</h4>
+              </div>
+              <p class="text-xs text-slate-300">
+                Funciona directo en cualquier celular (iOS y Android) o PC sin
+                descargar apps pesadas ni recordar contraseñas.
+              </p>
+            </div>
+
+            <div
+              class="bg-brand-card p-4 rounded-xl border border-brand-border"
+            >
+              <div
+                class="flex items-center gap-2.5 text-white font-bold text-sm mb-1"
+              >
+                <i
+                  class="fa-solid fa-envelope-circle-check text-brand-gold"
+                ></i>
+                <h4>Confirmación y recordatorios por email</h4>
+              </div>
+              <p class="text-xs text-slate-300">
+                Avisos automáticos que blindan la asistencia del cliente y
+                reducen drásticamente los plantones.
+              </p>
+            </div>
+
+            <div
+              class="bg-brand-card p-4 rounded-xl border border-brand-border"
+            >
+              <div
+                class="flex items-center gap-2.5 text-white font-bold text-sm mb-1"
+              >
+                <i class="fa-solid fa-arrows-rotate text-brand-gold"></i>
+                <h4>Liberación instantánea de turnos</h4>
+              </div>
+              <p class="text-xs text-slate-300">
+                Si un cliente cancela, el horario queda disponible al instante
+                en la web para que otro cliente lo tome.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SLIDE 4: EL CONTROL ADMINISTRATIVO ================= -->
+      <section class="slide-panel flex-col max-w-5xl w-full mx-auto py-4">
+        <div class="text-center mb-6">
+          <span
+            class="text-xs uppercase font-bold tracking-widest text-brand-gold"
+            >Control Total</span
+          >
+          <h2
+            class="text-2xl sm:text-4xl font-bold font-display text-white mt-1"
+          >
+            El Panel de Control de tu Equipo
+          </h2>
+          <p class="text-sm text-brand-muted max-w-xl mx-auto mt-1">
+            Métricas, sueldos, promociones y agendas sincronizadas en tiempo
+            real.
+          </p>
+
+          <!-- Category Tab Selector -->
+          <div
+            class="inline-flex p-1 rounded-xl bg-black/50 border border-white/10 mt-3"
+          >
+            <button
+              onclick="switchAdminTab('core')"
+              id="tab-btn-core"
+              class="px-3 py-1 rounded-lg text-xs font-bold transition bg-brand-gold text-black shadow-sm"
+            >
+              Módulos Principales
+            </button>
+            <button
+              onclick="switchAdminTab('secondary')"
+              id="tab-btn-secondary"
+              class="px-3 py-1 rounded-lg text-xs font-medium transition text-slate-400 hover:text-white"
+            >
+              Ecosistema Completo (+Funcionalidades)
+            </button>
+          </div>
+        </div>
+
+        <!-- CORE MODULES TAB -->
+        <div
+          id="admin-core-view"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 my-auto"
+        >
+          <div
+            class="bg-brand-card p-4 sm:p-5 rounded-2xl gold-border-glow flex flex-col justify-between cursor-pointer group"
+            onclick="openFeatureModal('barbero')"
+          >
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <div
+                  class="w-10 h-10 rounded-xl bg-brand-gold/15 text-brand-gold flex items-center justify-center text-lg"
+                >
+                  <i class="fa-solid fa-id-badge"></i>
+                </div>
+                <span
+                  class="text-[10px] px-2 py-0.5 rounded-full bg-brand-gold/10 text-brand-gold border border-brand-gold/20 group-hover:bg-brand-gold group-hover:text-black transition"
+                >
+                  <i class="fa-solid fa-play text-[9px] mr-1"></i> Ver demo
+                </span>
+              </div>
+              <h3 class="text-sm font-bold text-white mb-1.5">
+                Planilla & Perfil por Barbero
+              </h3>
+              <p class="text-xs text-slate-300">
+                Cada barbero ve en su propio celular los turnos asignados del
+                día, sin acceder a la caja general del local.
+              </p>
+            </div>
+            <div
+              class="mt-3 text-[11px] font-semibold text-brand-gold flex items-center justify-between"
+            >
+              <span>✓ Vista móvil independiente</span>
+              <i
+                class="fa-solid fa-arrow-up-right-from-square text-xs opacity-70 group-hover:opacity-100"
+              ></i>
+            </div>
+          </div>
+
+          <div
+            class="bg-brand-card p-4 sm:p-5 rounded-2xl gold-border-glow flex flex-col justify-between cursor-pointer group"
+            onclick="openFeatureModal('caja')"
+          >
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <div
+                  class="w-10 h-10 rounded-xl bg-brand-gold/15 text-brand-gold flex items-center justify-center text-lg"
+                >
+                  <i class="fa-solid fa-cash-register"></i>
+                </div>
+                <span
+                  class="text-[10px] px-2 py-0.5 rounded-full bg-brand-gold/10 text-brand-gold border border-brand-gold/20 group-hover:bg-brand-gold group-hover:text-black transition"
+                >
+                  <i class="fa-solid fa-play text-[9px] mr-1"></i> Ver demo
+                </span>
+              </div>
+              <h3 class="text-sm font-bold text-white mb-1.5">
+                Caja Diaria, Ingresos & Egresos
+              </h3>
+              <p class="text-xs text-slate-300">
+                Registro seguro y transparente de ingresos por servicio y gastos
+                del negocio para conocer la ganancia neta en tiempo real.
+              </p>
+            </div>
+            <div
+              class="mt-3 text-[11px] font-semibold text-brand-gold flex items-center justify-between"
+            >
+              <span>✓ Balance al instante 100% blindado</span>
+              <i
+                class="fa-solid fa-arrow-up-right-from-square text-xs opacity-70 group-hover:opacity-100"
+              ></i>
+            </div>
+          </div>
+
+          <div
+            class="bg-brand-card p-4 sm:p-5 rounded-2xl gold-border-glow flex flex-col justify-between cursor-pointer group"
+            onclick="openFeatureModal('comisiones')"
+          >
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <div
+                  class="w-10 h-10 rounded-xl bg-brand-gold/15 text-brand-gold flex items-center justify-center text-lg"
+                >
+                  <i class="fa-solid fa-percent"></i>
+                </div>
+                <span
+                  class="text-[10px] px-2 py-0.5 rounded-full bg-brand-gold/10 text-brand-gold border border-brand-gold/20 group-hover:bg-brand-gold group-hover:text-black transition"
+                >
+                  <i class="fa-solid fa-play text-[9px] mr-1"></i> Ver demo
+                </span>
+              </div>
+              <h3 class="text-sm font-bold text-white mb-1.5">
+                Comisiones & Liquidación de Sueldos
+              </h3>
+              <p class="text-xs text-slate-300">
+                Configurá el porcentaje pactado para cada barbero. El sistema
+                desglosa cuánto liquidar a fin de semana o mes sin errores de
+                cuenta.
+              </p>
+            </div>
+            <div
+              class="mt-3 text-[11px] font-semibold text-brand-gold flex items-center justify-between"
+            >
+              <span>✓ 0 errores de cuenta con el equipo</span>
+              <i
+                class="fa-solid fa-arrow-up-right-from-square text-xs opacity-70 group-hover:opacity-100"
+              ></i>
+            </div>
+          </div>
+
+          <div
+            class="bg-brand-card p-4 sm:p-5 rounded-2xl gold-border-glow flex flex-col justify-between cursor-pointer group"
+            onclick="openFeatureModal('servicios')"
+          >
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <div
+                  class="w-10 h-10 rounded-xl bg-brand-gold/15 text-brand-gold flex items-center justify-center text-lg"
+                >
+                  <i class="fa-solid fa-tags"></i>
+                </div>
+                <span
+                  class="text-[10px] px-2 py-0.5 rounded-full bg-brand-gold/10 text-brand-gold border border-brand-gold/20 group-hover:bg-brand-gold group-hover:text-black transition"
+                >
+                  <i class="fa-solid fa-play text-[9px] mr-1"></i> Ver demo
+                </span>
+              </div>
+              <h3 class="text-sm font-bold text-white mb-1.5">
+                Servicios & Promociones
+              </h3>
+              <p class="text-xs text-slate-300">
+                Actualizá precios en segundos ante inflación, creá combos
+                promocionales de fin de semana o pausá opciones con un toque.
+              </p>
+            </div>
+            <div
+              class="mt-3 text-[11px] font-semibold text-brand-gold flex items-center justify-between"
+            >
+              <span>✓ Actualización inmediata en la web</span>
+              <i
+                class="fa-solid fa-arrow-up-right-from-square text-xs opacity-70 group-hover:opacity-100"
+              ></i>
+            </div>
+          </div>
+
+          <div
+            class="bg-brand-card p-4 sm:p-5 rounded-2xl gold-border-glow flex flex-col justify-between cursor-pointer group"
+            onclick="openFeatureModal('clientes')"
+          >
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <div
+                  class="w-10 h-10 rounded-xl bg-brand-gold/15 text-brand-gold flex items-center justify-center text-lg"
+                >
+                  <i class="fa-solid fa-users"></i>
+                </div>
+                <span
+                  class="text-[10px] px-2 py-0.5 rounded-full bg-brand-gold/10 text-brand-gold border border-brand-gold/20 group-hover:bg-brand-gold group-hover:text-black transition"
+                >
+                  <i class="fa-solid fa-play text-[9px] mr-1"></i> Ver demo
+                </span>
+              </div>
+              <h3 class="text-sm font-bold text-white mb-1.5">
+                Clientes Frecuentes vs Ocasionales
+              </h3>
+              <p class="text-xs text-slate-300">
+                Historial centralizado con número de visitas, preferencias y
+                contacto directo para premiar la lealtad o reactivar inactivos.
+              </p>
+            </div>
+            <div
+              class="mt-3 text-[11px] font-semibold text-brand-gold flex items-center justify-between"
+            >
+              <span>✓ Base de datos propia del negocio</span>
+              <i
+                class="fa-solid fa-arrow-up-right-from-square text-xs opacity-70 group-hover:opacity-100"
+              ></i>
+            </div>
+          </div>
+
+          <div
+            class="bg-brand-card p-4 sm:p-5 rounded-2xl gold-border-glow flex flex-col justify-between"
+          >
+            <div>
+              <div
+                class="w-10 h-10 rounded-xl bg-brand-gold/15 text-brand-gold flex items-center justify-center text-lg mb-3"
+              >
+                <i class="fa-solid fa-lock"></i>
+              </div>
+              <h3 class="text-sm font-bold text-white mb-1.5">
+                Privacidad & Roles Diferenciados
+              </h3>
+              <p class="text-xs text-slate-300">
+                Solamente el dueño o administrador general tiene acceso a las
+                cifras globales de facturación y balance neto del local.
+              </p>
+            </div>
+            <div class="mt-3 text-[11px] font-semibold text-brand-gold">
+              ✓ Total seguridad y confidencialidad
+            </div>
+          </div>
+        </div>
+
+        <!-- SECONDARY EXTENDED ECOSYSTEM TAB -->
+        <div
+          id="admin-secondary-view"
+          class="hidden grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 my-auto"
+        >
+          <div class="bg-brand-card/90 p-3.5 rounded-xl border border-white/10">
+            <div
+              class="flex items-center gap-2 text-brand-gold font-bold text-xs mb-1"
+            >
+              <i class="fa-solid fa-calendar-minus"></i>
+              <h4>Bloqueo de Francos y Pausas</h4>
+            </div>
+            <p class="text-[11px] text-slate-300">
+              Bloqueá descansos de almuerzo, francos semanales o días festivos
+              de cualquier miembro del equipo en segundos.
+            </p>
+          </div>
+
+          <div class="bg-brand-card/90 p-3.5 rounded-xl border border-white/10">
+            <div
+              class="flex items-center gap-2 text-brand-gold font-bold text-xs mb-1"
+            >
+              <i class="fa-solid fa-stopwatch"></i>
+              <h4>Duraciones Flexibles por Servicio</h4>
+            </div>
+            <p class="text-[11px] text-slate-300">
+              Asigná duraciones específicas (ej. 20 min para perfilado, 45 min
+              para corte y barba) para un calce perfecto de agenda.
+            </p>
+          </div>
+
+          <div class="bg-brand-card/90 p-3.5 rounded-xl border border-white/10">
+            <div
+              class="flex items-center gap-2 text-brand-gold font-bold text-xs mb-1"
+            >
+              <i class="fa-solid fa-bell"></i>
+              <h4>Avisos y Confirmaciones Automáticas</h4>
+            </div>
+            <p class="text-[11px] text-slate-300">
+              Notificaciones automáticas por correo electrónico para blindar la
+              asistencia y avisar al local de cancelaciones al instante.
+            </p>
+          </div>
+
+          <div class="bg-brand-card/90 p-3.5 rounded-xl border border-white/10">
+            <div
+              class="flex items-center gap-2 text-brand-gold font-bold text-xs mb-1"
+            >
+              <i class="fa-solid fa-money-bill-transfer"></i>
+              <h4>Preparado para Cobro de Señas</h4>
+            </div>
+            <p class="text-[11px] text-slate-300">
+              Estructura lista para vincular pasarelas (ej. Mercado Pago) y
+              cobrar seña previa antes de confirmar el turno.
+            </p>
+          </div>
+
+          <div class="bg-brand-card/90 p-3.5 rounded-xl border border-white/10">
+            <div
+              class="flex items-center gap-2 text-brand-gold font-bold text-xs mb-1"
+            >
+              <i class="fa-solid fa-file-invoice-dollar"></i>
+              <h4>Exportación de Reportes</h4>
+            </div>
+            <p class="text-[11px] text-slate-300">
+              Descargá resúmenes de servicios y facturación para llevar la
+              contabilidad al día sin pérdidas de datos.
+            </p>
+          </div>
+
+          <div class="bg-brand-card/90 p-3.5 rounded-xl border border-white/10">
+            <div
+              class="flex items-center gap-2 text-brand-gold font-bold text-xs mb-1"
+            >
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              <h4>Backups Diarios en la Nube</h4>
+            </div>
+            <p class="text-[11px] text-slate-300">
+              Toda tu agenda y caja se guardan con cifrado y copias continuas
+              sin riesgo de rotura de celular o pérdida física.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SLIDE 5: COMPARATIVA DIRECTA ================= -->
+      <section class="slide-panel flex-col max-w-5xl w-full mx-auto py-4">
+        <div class="text-center mb-6">
+          <span
+            class="text-xs uppercase font-bold tracking-widest text-brand-gold"
+            >El Salto de Nivel</span
+          >
+          <h2
+            class="text-2xl sm:text-4xl font-bold font-display text-white mt-1"
+          >
+            Tu Negocio Hoy vs. Con AgenZa
+          </h2>
+          <p class="text-sm text-brand-muted max-w-xl mx-auto mt-1">
+            Comprobá el impacto operativo que experimenta tu local desde la
+            primera semana.
+          </p>
+        </div>
+
+        <div
+          class="overflow-x-auto w-full rounded-2xl border border-brand-border bg-brand-card my-auto"
+        >
+          <table class="w-full text-left border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr class="border-b border-brand-border bg-[#161824]">
+                <th class="p-3.5 sm:p-4 text-brand-muted font-bold">
+                  Área Operativa
+                </th>
+                <th class="p-3.5 sm:p-4 text-red-400 font-bold bg-red-950/20">
+                  Método Tradicional (Libreta / Chat)
+                </th>
+                <th
+                  class="p-3.5 sm:p-4 text-brand-gold font-bold bg-brand-gold/10"
+                >
+                  Con el Ecosistema AgenZa
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-white/5">
+              <tr>
+                <td class="p-3.5 sm:p-4 font-semibold text-white">
+                  Disponibilidad de turnos
+                </td>
+                <td class="p-3.5 sm:p-4 text-slate-300">
+                  Solo cuando tenés tiempo de responder el teléfono.
+                </td>
+                <td class="p-3.5 sm:p-4 text-brand-goldLight font-medium">
+                  Reservas activas 24/7 incluso mientras dormís.
+                </td>
+              </tr>
+              <tr>
+                <td class="p-3.5 sm:p-4 font-semibold text-white">
+                  Pérdida por No-Shows
+                </td>
+                <td class="p-3.5 sm:p-4 text-slate-300">
+                  Alta. El cliente se olvida y deja el sillón vacío.
+                </td>
+                <td class="p-3.5 sm:p-4 text-brand-goldLight font-medium">
+                  Recordatorios automáticos que reducen ausentismo un 80%.
+                </td>
+              </tr>
+              <tr>
+                <td class="p-3.5 sm:p-4 font-semibold text-white">
+                  Liquidación de comisiones
+                </td>
+                <td class="p-3.5 sm:p-4 text-slate-300">
+                  Horas con libreta y calculadora al final de la semana.
+                </td>
+                <td class="p-3.5 sm:p-4 text-brand-goldLight font-medium">
+                  Cálculo exacto en 1 clic según servicios completados.
+                </td>
+              </tr>
+              <tr>
+                <td class="p-3.5 sm:p-4 font-semibold text-white">
+                  Imagen de marca
+                </td>
+                <td class="p-3.5 sm:p-4 text-slate-300">
+                  Respuestas tardías que transmiten desorganización.
+                </td>
+                <td class="p-3.5 sm:p-4 text-brand-goldLight font-medium">
+                  Web moderna y profesional que eleva el valor de tu marca.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= SLIDE 6: PROCESO LLAVE EN MANO ================= -->
+      <section class="slide-panel flex-col max-w-5xl w-full mx-auto py-4">
+        <div class="text-center mb-6">
+          <span
+            class="text-xs uppercase font-bold tracking-widest text-brand-gold"
+            >Implementación</span
+          >
+          <h2
+            class="text-2xl sm:text-4xl font-bold font-display text-white mt-1"
+          >
+            Listo en 7 a 10 Días Hábiles
+          </h2>
+          <p class="text-sm text-brand-muted max-w-xl mx-auto mt-1">
+            Nosotros hacemos todo el diseño y montaje técnico con 2 entregas de
+            prueba.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 my-auto">
+          <div class="bg-brand-card p-6 rounded-2xl gold-border-glow relative">
+            <span
+              class="text-4xl font-extrabold font-display text-brand-gold/20 absolute top-4 right-5"
+              >01</span
+            >
+            <span
+              class="px-2.5 py-1 rounded bg-brand-gold/15 text-brand-gold text-xs font-bold uppercase"
+              >Día 1</span
+            >
+            <h3 class="text-base font-bold text-white mt-3 mb-2">
+              Relevamiento de Marca
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-3">
+              Nos enviás tus fotos del local, catálogo de servicios con precios,
+              vías de contacto (WhatsApp, Instagram, email) y porcentajes de tu
+              equipo.
+            </p>
+            <div class="text-[11px] text-brand-muted">
+              Entregable: Carpeta técnica y puesta en marcha de diseño.
+            </div>
+          </div>
+
+          <div
+            class="bg-brand-card p-6 rounded-2xl gold-border-glow relative border-brand-gold/40"
+          >
+            <span
+              class="text-4xl font-extrabold font-display text-brand-gold/20 absolute top-4 right-5"
+              >02</span
+            >
+            <span
+              class="px-2.5 py-1 rounded bg-brand-gold/15 text-brand-gold text-xs font-bold uppercase"
+              >Día 4 a 5</span
+            >
+            <h3 class="text-base font-bold text-white mt-3 mb-2">
+              1ª Entrega: Prototipo Funcional
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-3">
+              Te mostramos la plataforma en vivo para que pruebes el flujo de
+              reserva en tu celular, revises la estética visual y valides cada
+              dato cargado.
+            </p>
+            <div class="text-[11px] text-brand-muted">
+              Entregable: Web funcional para tu feedback directo.
+            </div>
+          </div>
+
+          <div class="bg-brand-card p-6 rounded-2xl gold-border-glow relative">
+            <span
+              class="text-4xl font-extrabold font-display text-brand-gold/20 absolute top-4 right-5"
+              >03</span
+            >
+            <span
+              class="px-2.5 py-1 rounded bg-brand-gold/15 text-brand-gold text-xs font-bold uppercase"
+              >Día 7 a 10</span
+            >
+            <h3 class="text-base font-bold text-white mt-3 mb-2">
+              2ª Entrega: Lanzamiento Final
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-3">
+              Aplicamos todos tus ajustes de refinamiento, testeamos la carga en
+              vivo y te entregamos tu link oficial listo para poner en Instagram
+              y WhatsApp.
+            </p>
+            <div class="text-[11px] text-brand-muted">
+              Entregable: Sistema 100% activo en producción.
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="mt-6 p-4 rounded-xl bg-brand-card border border-brand-border text-center text-xs sm:text-sm text-slate-300"
+        >
+          ⭐ <strong class="text-white">Acompañamiento guiado:</strong> Te
+          enviamos un instructivo en video de 3 minutos para que vos y tus
+          barberos la usen sin fricción desde el minuto uno.
+        </div>
+      </section>
+
+      <!-- ================= SLIDE 7: PROPUESTA COMERCIAL & INVERSIÓN ================= -->
+      <section class="slide-panel flex-col max-w-5xl w-full mx-auto py-4">
+        <div class="text-center mb-5">
+          <span
+            class="text-xs uppercase font-bold tracking-widest text-brand-gold"
+            >Propuesta Comercial & Rentabilidad</span
+          >
+          <h2
+            class="text-2xl sm:text-4xl font-bold font-display text-white mt-1"
+          >
+            Inversión & Retorno Garantizado
+          </h2>
+          <p class="text-sm text-brand-muted max-w-xl mx-auto mt-1">
+            Sin letra chica ni contratos forzados. AgenZa se paga sola en las
+            primeras 2 semanas.
+          </p>
+        </div>
+
+        <!-- INTERACTIVE ROI CALCULATOR -->
+        <div
+          class="w-full bg-gradient-to-r from-[#181A26] via-[#12141D] to-[#181A26] p-4 rounded-2xl border border-brand-gold/30 mb-5 shadow-lg"
+        >
+          <div
+            class="flex flex-col md:flex-row items-center justify-between gap-4"
+          >
+            <div class="space-y-1 text-left w-full md:w-5/12">
+              <span
+                class="text-[10px] uppercase font-bold tracking-wider text-brand-gold"
+                >Calculadora de Ahorro en Vivo</span
+              >
+              <h4 class="text-sm font-bold text-white">
+                ¿Cuánto dinero recupera tu local al mes?
+              </h4>
+              <p class="text-[11px] text-slate-300">
+                Mové los controles según la actividad de tu salón:
+              </p>
+
+              <div class="space-y-2 pt-2">
+                <div>
+                  <div class="flex justify-between text-[11px] text-slate-300">
+                    <span>Turnos atendidos por día:</span>
+                    <span id="calc-turnos-val" class="font-bold text-brand-gold"
+                      >15 turnos</span
+                    >
+                  </div>
+                  <input
+                    type="range"
+                    id="calc-turnos"
+                    min="5"
+                    max="40"
+                    value="15"
+                    step="1"
+                    class="w-full accent-brand-gold h-1.5 bg-gray-700 rounded-lg cursor-pointer"
+                    oninput="calculateROI()"
+                  />
+                </div>
+                <div>
+                  <div class="flex justify-between text-[11px] text-slate-300">
+                    <span>Valor promedio del servicio:</span>
+                    <span id="calc-precio-val" class="font-bold text-brand-gold"
+                      >$12.000 ARS</span
+                    >
+                  </div>
+                  <input
+                    type="range"
+                    id="calc-precio"
+                    min="5000"
+                    max="30000"
+                    value="12000"
+                    step="1000"
+                    class="w-full accent-brand-gold h-1.5 bg-gray-700 rounded-lg cursor-pointer"
+                    oninput="calculateROI()"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="w-full md:w-7/12 grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-center"
+            >
+              <div class="p-3 bg-black/50 rounded-xl border border-red-500/20">
+                <p class="text-[10px] text-slate-400">
+                  Pérdida habitual (No-shows)
+                </p>
+                <p
+                  id="calc-perdida"
+                  class="text-sm sm:text-base font-extrabold text-red-400 mt-0.5"
+                >
+                  -$288.000
+                </p>
+                <span class="text-[9px] text-slate-500"
+                  >2 turnos caídos/semana</span
+                >
+              </div>
+              <div
+                class="p-3 bg-black/50 rounded-xl border border-amber-500/20"
+              >
+                <p class="text-[10px] text-slate-400">
+                  Horas contestando chats
+                </p>
+                <p
+                  id="calc-horas"
+                  class="text-sm sm:text-base font-extrabold text-amber-400 mt-0.5"
+                >
+                  30 hrs/mes
+                </p>
+                <span class="text-[9px] text-slate-500"
+                  >1 hr diaria al teléfono</span
+                >
+              </div>
+              <div
+                class="col-span-2 sm:col-span-1 p-3 bg-brand-gold/10 rounded-xl border border-brand-gold/30"
+              >
+                <p class="text-[10px] text-brand-goldLight font-semibold">
+                  Dinero recuperado neto
+                </p>
+                <p
+                  id="calc-recuperado"
+                  class="text-sm sm:text-base font-black text-brand-gold mt-0.5"
+                >
+                  +$360.000
+                </p>
+                <span class="text-[9px] text-brand-goldLight"
+                  >¡El sistema es gratis!</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Investment Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 my-auto">
+          <!-- Setup Card -->
+          <div
+            class="bg-gradient-to-b from-[#151722] to-[#0E1018] p-5 rounded-2xl gold-border-glow flex flex-col justify-between"
+          >
+            <div>
+              <div class="flex justify-between items-start mb-3">
+                <div>
+                  <span
+                    class="text-[11px] uppercase tracking-wider font-bold text-brand-gold"
+                    >Fase 1 · Pago Único</span
+                  >
+                  <h3 class="text-lg font-bold text-white mt-0.5">
+                    Setup & Personalización
+                  </h3>
+                </div>
+                <span
+                  class="px-2.5 py-1 rounded bg-brand-gold/15 text-brand-gold text-xs font-bold"
+                  >Llave en Mano</span
+                >
+              </div>
+
+              <div class="space-y-2.5 mb-4">
+                <div
+                  class="p-2.5 rounded-xl bg-black/40 border border-brand-border flex items-center justify-between"
+                >
+                  <div>
+                    <p class="text-xs font-semibold text-white">
+                      Pago Único Contado
+                    </p>
+                    <p class="text-[10px] text-brand-muted">
+                      Máximo ahorro inmediato
+                    </p>
+                  </div>
+                  <span class="text-xl font-extrabold text-brand-gold"
+                    >$500.000
+                    <span class="text-[10px] font-normal text-slate-400"
+                      >ARS</span
+                    ></span
+                  >
+                </div>
+
+                <div
+                  class="p-2.5 rounded-xl bg-black/40 border border-white/5 flex items-center justify-between"
+                >
+                  <div>
+                    <p class="text-xs font-semibold text-white">
+                      Financiado en Cuotas
+                    </p>
+                    <p class="text-[10px] text-brand-muted">
+                      2 cuotas de $300.000 ARS
+                    </p>
+                  </div>
+                  <span class="text-lg font-bold text-slate-200"
+                    >$600.000
+                    <span class="text-[10px] font-normal text-slate-400"
+                      >ARS</span
+                    ></span
+                  >
+                </div>
+              </div>
+
+              <ul class="text-[11px] text-slate-300 space-y-1.5 mb-2">
+                <li class="flex items-center gap-2">
+                  <i class="fa-solid fa-check text-brand-gold"></i>
+                  <strong>Seña inicial del 30%</strong> ($150.000 ARS) para
+                  arrancar el diseño.
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="fa-solid fa-check text-brand-gold"></i> Saldo contra
+                  entrega final y aprobación total del sistema.
+                </li>
+                <li class="flex items-center gap-2">
+                  <i class="fa-solid fa-check text-brand-gold"></i> Carga de
+                  servicios, fotos, horarios y comisiones.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Maintenance Card -->
+          <div
+            class="bg-gradient-to-b from-[#151722] to-[#0E1018] p-5 rounded-2xl gold-border-glow flex flex-col justify-between"
+          >
+            <div>
+              <div class="flex justify-between items-start mb-3">
+                <div>
+                  <span
+                    class="text-[11px] uppercase tracking-wider font-bold text-emerald-400"
+                    >Fase 2 · Operación Cloud</span
+                  >
+                  <h3 class="text-lg font-bold text-white mt-0.5">
+                    Mantenimiento & Servidor
+                  </h3>
+                </div>
+                <span
+                  class="px-2.5 py-1 rounded bg-emerald-500/15 text-emerald-400 text-xs font-bold"
+                  >Mes 1 BONIFICADO</span
+                >
+              </div>
+
+              <div
+                class="p-2.5 rounded-xl bg-emerald-950/20 border border-emerald-500/30 mb-3 text-center"
+              >
+                <span
+                  class="text-xs font-bold text-emerald-400 uppercase tracking-wide"
+                  >🎁 PRIMER MES 100% GRATIS</span
+                >
+                <p class="text-[10px] text-slate-300 mt-0.5">
+                  Operá y recibí turnos sin ningún costo fijo de servidor.
+                </p>
+              </div>
+
+              <div class="space-y-2 mb-3 text-xs">
+                <div
+                  class="p-2.5 rounded-xl bg-black/40 border border-brand-border flex items-center justify-between"
+                >
+                  <div>
+                    <span class="text-brand-gold font-bold"
+                      >Abono con Pronto Pago (1 al 10):</span
+                    >
+                    <p class="text-[10px] text-slate-400">
+                      Tarifa bonificada mensual
+                    </p>
+                  </div>
+                  <span class="text-base font-extrabold text-brand-gold"
+                    >$30.000
+                    <span class="text-[10px] font-normal text-slate-400"
+                      >ARS</span
+                    ></span
+                  >
+                </div>
+
+                <div
+                  class="p-2.5 rounded-xl bg-black/30 border border-white/5 flex items-center justify-between"
+                >
+                  <div>
+                    <span class="text-slate-300"
+                      >Pago fuera de término (desde el día 11):</span
+                    >
+                    <p class="text-[10px] text-slate-500">
+                      Tarifa estándar mensual
+                    </p>
+                  </div>
+                  <span class="text-sm font-bold text-slate-300"
+                    >$40.000
+                    <span class="text-[10px] font-normal text-slate-400"
+                      >ARS</span
+                    ></span
+                  >
+                </div>
+              </div>
+
+              <p class="text-[10px] text-slate-400">
+                🛡️ <strong>Sin contratos de permanencia:</strong> Incluye
+                hosting de alta velocidad, copias de seguridad continuas y
+                soporte permanente.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SLIDE 8: PREGUNTAS FRECUENTES Y CIERRE ================= -->
+      <section class="slide-panel flex-col max-w-5xl w-full mx-auto py-4">
+        <div class="text-center mb-6">
+          <span
+            class="text-xs uppercase font-bold tracking-widest text-brand-gold"
+            >Resolución de Dudas</span
+          >
+          <h2
+            class="text-2xl sm:text-4xl font-bold font-display text-white mt-1"
+          >
+            Preguntas Frecuentes & Próximos Pasos
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-auto items-start">
+          <div class="space-y-2.5">
+            <div
+              class="bg-brand-card p-3.5 rounded-xl border border-brand-border"
+            >
+              <h4
+                class="text-xs sm:text-sm font-bold text-white mb-1 flex items-center gap-2"
+              >
+                <i class="fa-solid fa-circle-question text-brand-gold"></i>
+                ¿Mis clientes tienen que descargar alguna app?
+              </h4>
+              <p class="text-xs text-slate-300">
+                No. Acceden directo desde el navegador de su celular mediante el
+                enlace oficial que colocás en Instagram o WhatsApp.
+              </p>
+            </div>
+
+            <div
+              class="bg-brand-card p-3.5 rounded-xl border border-brand-border"
+            >
+              <h4
+                class="text-xs sm:text-sm font-bold text-white mb-1 flex items-center gap-2"
+              >
+                <i class="fa-solid fa-circle-question text-brand-gold"></i>
+                ¿Cada barbero puede ver solo sus turnos?
+              </h4>
+              <p class="text-xs text-slate-300">
+                Sí. Cada profesional tiene su vista individual en su móvil para
+                gestionar su ritmo de trabajo sin tocar configuraciones del
+                local ni ver la caja global.
+              </p>
+            </div>
+
+            <div
+              class="bg-brand-card p-3.5 rounded-xl border border-brand-border"
+            >
+              <h4
+                class="text-xs sm:text-sm font-bold text-white mb-1 flex items-center gap-2"
+              >
+                <i class="fa-solid fa-circle-question text-brand-gold"></i>
+                ¿Cómo actualizo los precios si hay cambios?
+              </h4>
+              <p class="text-xs text-slate-300">
+                Desde tu panel administrativo cambiás tarifas, sumás nuevos
+                servicios o pausás opciones con dos toques y efecto inmediato.
+              </p>
+            </div>
+
+            <div
+              class="bg-brand-card p-3.5 rounded-xl border border-brand-border"
+            >
+              <h4
+                class="text-xs sm:text-sm font-bold text-white mb-1 flex items-center gap-2"
+              >
+                <i class="fa-solid fa-circle-question text-brand-gold"></i>
+                ¿Qué pasa si no soy bueno con la tecnología?
+              </h4>
+              <p class="text-xs text-slate-300">
+                Te entregamos un video instructivo de 3 minutos y te acompañamos
+                paso a paso. La interfaz es tan fácil de usar como enviar un
+                mensaje.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="bg-gradient-to-b from-[#191B26] to-[#0F1118] p-6 rounded-2xl gold-border-glow text-center flex flex-col items-center"
+          >
+            <div
+              class="w-14 h-14 rounded-2xl bg-brand-gold/15 border border-brand-gold text-brand-gold flex items-center justify-center text-2xl mb-4 shadow-lg shadow-brand-gold/10"
+            >
+              <i class="fa-solid fa-rocket"></i>
+            </div>
+
+            <h3 class="text-xl font-bold font-display text-white mb-2">
+              Comencemos con tu Local
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-300 mb-6 max-w-sm">
+              Confirmamos la fecha con el 30% de seña y en 5 días hábiles ya
+              estás probando la primera versión de tu plataforma.
+            </p>
+
+            <div
+              class="w-full space-y-2 text-left text-xs bg-black/40 p-3.5 rounded-xl border border-white/5 mb-6"
+            >
+              <div class="flex items-center gap-2 text-slate-200">
+                <span
+                  class="w-5 h-5 rounded-full bg-brand-gold text-black font-bold flex items-center justify-center text-[10px]"
+                  >1</span
+                >
+                <span
+                  >Asegurá tu fecha de desarrollo con el 30% de seña ($150.000
+                  ARS).</span
+                >
+              </div>
+              <div class="flex items-center gap-2 text-slate-200">
+                <span
+                  class="w-5 h-5 rounded-full bg-brand-gold text-black font-bold flex items-center justify-center text-[10px]"
+                  >2</span
+                >
+                <span
+                  >Facilitanos tus fotos, servicios y esquema de equipo.</span
+                >
+              </div>
+              <div class="flex items-center gap-2 text-slate-200">
+                <span
+                  class="w-5 h-5 rounded-full bg-brand-gold text-black font-bold flex items-center justify-center text-[10px]"
+                  >3</span
+                >
+                <span
+                  >Activamos tu primer mes de mantenimiento 100%
+                  bonificado.</span
+                >
+              </div>
+            </div>
+
+            <a
+              id="final-whatsapp-cta"
+              href="https://wa.me/5493518553366?text=Hola%20AgenZa,%20quiero%20coordinar%20el%20inicio%20de%20mi%20plataforma%20con%20el%20primer%20mes%20bonificado"
+              target="_blank"
+              class="w-full py-3.5 rounded-xl bg-gradient-to-r from-brand-gold to-brand-goldDark text-black font-extrabold text-sm hover:brightness-110 shadow-lg shadow-brand-gold/25 flex items-center justify-center gap-2 transition"
+            >
+              <i class="fa-brands fa-whatsapp text-lg"></i>
+              <span>Contactar por WhatsApp para Iniciar</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom Floating Navigation Footer -->
+    <footer
+      class="w-full bg-[#0D0F17]/95 border-t border-brand-border px-4 md:px-8 py-3 flex items-center justify-between z-30 shrink-0"
+    >
+      <button
+        id="prev-btn"
+        onclick="prevSlide()"
+        class="px-4 py-2 rounded-xl bg-brand-card hover:bg-brand-cardHover border border-brand-border text-xs md:text-sm font-semibold text-slate-200 transition disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2"
+      >
+        <i class="fa-solid fa-chevron-left text-brand-gold"></i>
+        <span class="hidden sm:inline">Anterior</span>
+      </button>
+
+      <!-- Slide Indicators Dots -->
+      <div id="dots-container" class="flex items-center gap-2">
+        <!-- Rendered dynamically by JavaScript -->
+      </div>
+
+      <button
+        id="next-btn"
+        onclick="nextSlide()"
+        class="px-5 py-2 rounded-xl bg-brand-gold hover:bg-brand-goldLight text-black text-xs md:text-sm font-bold transition shadow-md shadow-brand-gold/20 flex items-center gap-2"
+      >
+        <span class="hidden sm:inline">Siguiente</span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </footer>
+
+    <!-- Slide Index Modal / Drawer -->
+    <div
+      id="slide-index-modal"
+      class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-[#12141D] border border-brand-border rounded-2xl max-w-lg w-full p-6 relative max-h-[85vh] overflow-y-auto"
+      >
+        <div
+          class="flex items-center justify-between pb-4 border-b border-brand-border mb-4"
+        >
+          <h3 class="font-display font-bold text-lg text-white">
+            Índice del Dossier
+          </h3>
+          <button
+            onclick="toggleIndexModal()"
+            class="text-brand-muted hover:text-white p-1"
+          >
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+        <div id="index-list" class="space-y-2">
+          <!-- Dynamic slide index list -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Feature Screen/Video Modal -->
+    <div
+      id="feature-modal"
+      class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-[#12141D] border border-brand-gold/40 rounded-2xl max-w-2xl w-full p-5 sm:p-6 relative max-h-[90vh] overflow-y-auto shadow-2xl"
+      >
+        <div
+          class="flex items-center justify-between pb-3 border-b border-white/10 mb-4"
+        >
+          <div class="flex items-center gap-2.5">
+            <div
+              id="modal-icon-badge"
+              class="w-8 h-8 rounded-lg bg-brand-gold/15 text-brand-gold flex items-center justify-center text-sm font-bold"
+            >
+              <i class="fa-solid fa-laptop-code"></i>
+            </div>
+            <div>
+              <h3
+                id="modal-title"
+                class="font-display font-bold text-base sm:text-lg text-white"
+              >
+                Módulo AgenZa
+              </h3>
+              <p
+                id="modal-subtitle"
+                class="text-[11px] text-brand-gold font-medium"
+              >
+                Demostración de funcionamiento
+              </p>
+            </div>
+          </div>
+          <button
+            onclick="closeFeatureModal()"
+            class="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 text-brand-muted hover:text-white flex items-center justify-center transition"
+          >
+            <i class="fa-solid fa-xmark text-base"></i>
+          </button>
+        </div>
+
+        <!-- Video or Simulated Interactive UI Display Container -->
+        <div id="modal-content-container" class="space-y-4">
+          <!-- Populated dynamically by openFeatureModal() -->
+        </div>
+
+        <div
+          class="mt-5 pt-3 border-t border-white/10 flex items-center justify-between"
+        >
+          <span class="text-[11px] text-slate-400"
+            >Desarrollado a medida con tu identidad de marca</span
+          >
+          <button
+            onclick="closeFeatureModal()"
+            class="px-4 py-1.5 rounded-lg bg-brand-gold text-black font-bold text-xs hover:brightness-110 transition"
+          >
+            Entendido
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Unified Single Controller Script -->
+    <script>
+      const slides = document.querySelectorAll(".slide-panel");
+      const totalSlides = slides.length;
+      let currentSlideIndex = 0;
+
+      const MI_WHATSAPP = "5493518553366";
+
+      const slideTitles = [
+        "1. Portada — AgenZa",
+        "2. Diagnóstico Operativo",
+        "3. La Experiencia del Cliente",
+        "4. Control Administrativo & Panel",
+        "5. Comparativa: Hoy vs. Con AgenZa",
+        "6. Proceso Llave en Mano (7-10 días)",
+        "7. Propuesta Comercial & Precios",
+        "8. Preguntas Frecuentes & Cierre",
+      ];
+
+      // Feature Modals Data: Video demo & short description
+      const featureDetails = {
+        reserva: {
+          title: "Portal Web de Reservas 24/7",
+          subtitle: "Experiencia ágil para tus clientes",
+          icon: "fa-solid fa-mobile-screen-button",
+          videoSrc: "videos/reserva.mp4",
+          description:
+            "Tus clientes acceden desde tu Instagram o WhatsApp, eligen su profesional, servicio y horario en 10 segundos, sin descargar aplicaciones ni recordar contraseñas.",
+        },
+        barbero: {
+          title: "Planilla y Vista Móvil por Barbero",
+          subtitle: "Comodidad total para el equipo",
+          icon: "fa-solid fa-id-badge",
+          videoSrc: "videos/barbero.mp4",
+          description:
+            "Cada profesional entra desde su celular a un link privado. Puede consultar su cronograma de turnos ordenados cronológicamente, ver el servicio a realizar, notas del cliente y marcar como completado.",
+        },
+        caja: {
+          title: "Control de Caja Diaria & Gastos",
+          subtitle: "Transparencia financiera absoluta",
+          icon: "fa-solid fa-cash-register",
+          videoSrc: "videos/caja.mp4",
+          description:
+            "El sistema suma automáticamente los ingresos generados por cada turno completado y te permite registrar egresos rápidos del día (limpieza, insumos, refrigerios) para arrojarte el balance neto exacto sin papel.",
+        },
+        comisiones: {
+          title: "Cálculo Automático de Comisiones",
+          subtitle: "Liquidación de sueldos en 1 clic",
+          icon: "fa-solid fa-percent",
+          videoSrc: "videos/comisiones.mp4",
+          description:
+            "Definís el porcentaje de comisión para cada profesional (ej: 50%, 60% o fijo). AgenZa computa cada servicio finalizado y te muestra la liquidación acumulada lista para pagar a fin de semana o mes.",
+        },
+        servicios: {
+          title: "Catálogo de Servicios y Promociones",
+          subtitle: "Flexibilidad total de precios",
+          icon: "fa-solid fa-tags",
+          videoSrc: "videos/servicios.mp4",
+          description:
+            "Subí o bajá precios al instante, ajustá duraciones en minutos y activá banners de promociones temporales (como combos corte + barba en días valle) que impactan en vivo en la web de reservas.",
+        },
+        clientes: {
+          title: "Base de Datos de Clientes",
+          subtitle: "Fidelización y control de visitas",
+          icon: "fa-solid fa-users",
+          videoSrc: "videos/clientes.mp4",
+          description:
+            "Identificá automáticamente a tus clientes recurrentes frente a los ocasionales, con historial de fechas, barbero de preferencia y contacto directo para campañas de reactivación vía WhatsApp.",
+        },
+      };
+
+      function openFeatureModal(key) {
+        const data = featureDetails[key];
+        if (!data) return;
+
+        document.getElementById("modal-title").textContent = data.title;
+        document.getElementById("modal-subtitle").textContent = data.subtitle;
+        document.getElementById("modal-icon-badge").innerHTML =
+          `<i class="${data.icon}"></i>`;
+
+        const container = document.getElementById("modal-content-container");
+        const videoBlock = data.videoSrc
+          ? `
+                <div class="rounded-xl overflow-hidden border border-brand-gold/30 bg-black/80 aspect-video w-full flex items-center justify-center relative shadow-lg">
+                    <video autoplay loop muted playsinline class="w-full h-full object-contain" onerror="this.parentElement.style.display='none';">
+                        <source src="${data.videoSrc}" type="video/mp4">
+                    </video>
+                </div>
+            `
+          : "";
+
+        // Clean layout: only description + video
+        container.innerHTML = `
+                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-3">${data.description}</p>
+                ${videoBlock}
+            `;
+
+        document.getElementById("feature-modal").classList.remove("hidden");
+      }
+
+      function closeFeatureModal() {
+        const container = document.getElementById("modal-content-container");
+        const video = container.querySelector("video");
+        if (video) {
+          video.pause();
+        }
+        document.getElementById("feature-modal").classList.add("hidden");
+      }
+
+      // Switch between Admin Core and Secondary tabs
+      function switchAdminTab(tab) {
+        const coreView = document.getElementById("admin-core-view");
+        const secView = document.getElementById("admin-secondary-view");
+        const coreBtn = document.getElementById("tab-btn-core");
+        const secBtn = document.getElementById("tab-btn-secondary");
+
+        if (tab === "core") {
+          coreView.classList.remove("hidden");
+          coreView.classList.add("grid");
+          secView.classList.add("hidden");
+          secView.classList.remove("grid");
+
+          coreBtn.className =
+            "px-3 py-1 rounded-lg text-xs font-bold transition bg-brand-gold text-black shadow-sm";
+          secBtn.className =
+            "px-3 py-1 rounded-lg text-xs font-medium transition text-slate-400 hover:text-white";
+        } else {
+          coreView.classList.add("hidden");
+          coreView.classList.remove("grid");
+          secView.classList.remove("hidden");
+          secView.classList.add("grid");
+
+          secBtn.className =
+            "px-3 py-1 rounded-lg text-xs font-bold transition bg-brand-gold text-black shadow-sm";
+          coreBtn.className =
+            "px-3 py-1 rounded-lg text-xs font-medium transition text-slate-400 hover:text-white";
+        }
+      }
+
+      // Live ROI Calculator Logic
+      function calculateROI() {
+        const turnosDia =
+          parseInt(document.getElementById("calc-turnos").value) || 15;
+        const precio =
+          parseInt(document.getElementById("calc-precio").value) || 12000;
+
+        document.getElementById("calc-turnos-val").textContent =
+          `${turnosDia} turnos`;
+        document.getElementById("calc-precio-val").textContent =
+          `$${precio.toLocaleString("es-AR")} ARS`;
+
+        const perdidaMensual = 8 * precio;
+        document.getElementById("calc-perdida").textContent =
+          `-$${perdidaMensual.toLocaleString("es-AR")}`;
+
+        const horasAhorradas = Math.round(turnosDia * 2);
+        document.getElementById("calc-horas").textContent =
+          `${horasAhorradas} hrs/mes`;
+
+        const recuperado = Math.round(perdidaMensual * 1.25);
+        document.getElementById("calc-recuperado").textContent =
+          `+$${recuperado.toLocaleString("es-AR")}`;
+      }
+
+      // Update UI controls, counters, and progress bar
+      function updateSlideUI() {
+        slides.forEach((slide, idx) => {
+          if (idx === currentSlideIndex) {
+            slide.classList.add("active");
+          } else {
+            slide.classList.remove("active");
+          }
+        });
+
+        document.getElementById("current-slide-num").textContent =
+          currentSlideIndex + 1;
+        document.getElementById("total-slides-num").textContent = totalSlides;
+
+        const progress = ((currentSlideIndex + 1) / totalSlides) * 100;
+        document.getElementById("progress-bar").style.width = `${progress}%`;
+
+        document.getElementById("prev-btn").disabled = currentSlideIndex === 0;
+
+        const nextBtn = document.getElementById("next-btn");
+        if (currentSlideIndex === totalSlides - 1) {
+          nextBtn.innerHTML =
+            '<span>Finalizar</span> <i class="fa-solid fa-check"></i>';
+        } else {
+          nextBtn.innerHTML =
+            '<span class="hidden sm:inline">Siguiente</span> <i class="fa-solid fa-chevron-right"></i>';
+        }
+
+        renderDots();
+      }
+
+      function goToSlide(index) {
+        if (index >= 0 && index < totalSlides) {
+          currentSlideIndex = index;
+          updateSlideUI();
+        }
+      }
+
+      function nextSlide() {
+        if (currentSlideIndex < totalSlides - 1) {
+          currentSlideIndex++;
+          updateSlideUI();
+        }
+      }
+
+      function prevSlide() {
+        if (currentSlideIndex > 0) {
+          currentSlideIndex--;
+          updateSlideUI();
+        }
+      }
+
+      // Render Dots in Footer
+      function renderDots() {
+        const container = document.getElementById("dots-container");
+        container.innerHTML = "";
+        for (let i = 0; i < totalSlides; i++) {
+          const dot = document.createElement("button");
+          dot.title = slideTitles[i];
+          dot.className = `w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+            i === currentSlideIndex
+              ? "bg-brand-gold w-6 rounded-md"
+              : "bg-slate-700 hover:bg-slate-500"
+          }`;
+          dot.onclick = () => goToSlide(i);
+          container.appendChild(dot);
+        }
+      }
+
+      // Build Slide Index inside Modal
+      function buildIndexModal() {
+        const listContainer = document.getElementById("index-list");
+        listContainer.innerHTML = "";
+        slideTitles.forEach((title, idx) => {
+          const item = document.createElement("button");
+          item.className = `w-full text-left p-3 rounded-xl transition flex items-center justify-between text-xs sm:text-sm font-medium ${
+            idx === currentSlideIndex
+              ? "bg-brand-gold/15 text-brand-gold border border-brand-gold/30"
+              : "bg-brand-card hover:bg-brand-cardHover text-slate-300 border border-brand-border"
+          }`;
+          item.innerHTML = `<span>${title}</span> <i class="fa-solid fa-chevron-right text-xs"></i>`;
+          item.onclick = () => {
+            goToSlide(idx);
+            toggleIndexModal();
+          };
+          listContainer.appendChild(item);
+        });
+      }
+
+      function toggleIndexModal() {
+        const modal = document.getElementById("slide-index-modal");
+        const isHidden = modal.classList.contains("hidden");
+        if (isHidden) {
+          buildIndexModal();
+          modal.classList.remove("hidden");
+        } else {
+          modal.classList.add("hidden");
+        }
+      }
+
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === "Space") {
+          nextSlide();
+        } else if (e.key === "ArrowLeft") {
+          prevSlide();
+        } else if (e.key === "Escape") {
+          closeFeatureModal();
+          const modal = document.getElementById("slide-index-modal");
+          if (!modal.classList.contains("hidden")) {
+            toggleIndexModal();
+          }
+        }
+      });
+
+      // Touch swipe support
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      document.addEventListener(
+        "touchstart",
+        (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        },
+        { passive: true },
+      );
+
+      document.addEventListener(
+        "touchend",
+        (e) => {
+          touchEndX = e.changedTouches[0].screenX;
+          handleSwipe();
+        },
+        { passive: true },
+      );
+
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        if (touchEndX < touchStartX - swipeThreshold) {
+          nextSlide();
+        }
+        if (touchEndX > touchStartX + swipeThreshold) {
+          prevSlide();
+        }
+      }
+
+      // Close modals when clicking backdrop
+      window.addEventListener("click", (e) => {
+        const featureModal = document.getElementById("feature-modal");
+        const indexModal = document.getElementById("slide-index-modal");
+        if (e.target === featureModal) {
+          closeFeatureModal();
+        }
+        if (e.target === indexModal) {
+          toggleIndexModal();
+        }
+      });
+
+      // Initialize on Load
+      window.onload = function () {
+        document
+          .getElementById("toggle-list-btn")
+          .addEventListener("click", toggleIndexModal);
+        updateSlideUI();
+        calculateROI();
+      };
+    </script>
+  </body>
+</html>
