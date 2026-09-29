@@ -238,7 +238,7 @@
 
     <!-- Presentation Main Viewport -->
     <main
-      class="flex-1 relative overflow-y-auto overflow-x-hidden ambient-radial flex items-start md:items-center justify-center p-3 md:p-6"
+      class="flex-1 relative overflow-y-auto overflow-x-hidden ambient-radial flex items-center justify-center p-3 md:p-6"
     >
       <!-- ================= SLIDE 1: PORTADA ================= -->
       <section
@@ -301,7 +301,7 @@
             <img
               src="logoagenza-removebg-preview.png"
               alt="AgenZa"
-              class="h-16 sm:h-20 md:h-24 object-contain filter drop-shadow-[0_4px_16px_rgba(212,175,55,0.3)]"
+              class="h-10 sm:h-12 md:h-14 object-contain filter drop-shadow-[0_4px_16px_rgba(212,175,55,0.3)]"
               onerror="
                 this.style.display = 'none';
                 this.nextElementSibling.style.display = 'flex';
@@ -539,7 +539,7 @@
           >
             <div class="w-16 h-1 rounded-full bg-slate-700 mx-auto mb-4"></div>
             <div
-              class="relative rounded-xl overflow-hidden border border-brand-gold/30 bg-black/60 aspect-video max-h-[320px] mx-auto flex items-center justify-center group cursor-pointer"
+              class="relative rounded-xl overflow-hidden border border-brand-gold/30 bg-black/60 aspect-[9/16] max-h-[320px] mx-auto flex items-center justify-center group cursor-pointer"
               onclick="openFeatureModal('reserva')"
             >
               <video
@@ -547,7 +547,7 @@
                 loop
                 muted
                 playsinline
-                class="w-full h-full object-contain pointer-events-none"
+                class="w-full h-full object-cover"
                 onerror="
                   this.style.display = 'none';
                   this.nextElementSibling.style.display = 'flex';
@@ -601,12 +601,12 @@
               <div
                 class="flex items-center gap-2.5 text-white font-bold text-sm mb-1"
               >
-                <i class="fa-solid fa-circle-check text-brand-gold"></i>
-                <h4>Cero descargas ni registros pesados</h4>
+                <i class="fa-solid fa-calendar-check text-brand-gold"></i>
+                <h4>Solicitud de turnos fijos semanales</h4>
               </div>
               <p class="text-xs text-slate-300">
-                Funciona directo en cualquier celular (iOS y Android) o PC sin
-                descargar apps pesadas ni recordar contraseñas.
+                El cliente puede solicitar su turno fijo recurrente de cada
+                semana, quedando sujeto a la aprobación o baja del barbero.
               </p>
             </div>
 
@@ -619,11 +619,12 @@
                 <i
                   class="fa-solid fa-envelope-circle-check text-brand-gold"
                 ></i>
-                <h4>Confirmación y recordatorios por email</h4>
+                <h4>Triple recordatorio automático por email</h4>
               </div>
               <p class="text-xs text-slate-300">
-                Avisos automáticos que blindan la asistencia del cliente y
-                reducen drásticamente los plantones.
+                Avisos automáticos al momento de reservar, 7 días antes y la
+                mañana del turno para blindar la asistencia y evitar huecos
+                vacíos.
               </p>
             </div>
 
@@ -634,11 +635,11 @@
                 class="flex items-center gap-2.5 text-white font-bold text-sm mb-1"
               >
                 <i class="fa-solid fa-arrows-rotate text-brand-gold"></i>
-                <h4>Liberación instantánea de turnos</h4>
+                <h4>Cancelación autónoma y liberación inmediata</h4>
               </div>
               <p class="text-xs text-slate-300">
-                Si un cliente cancela, el horario queda disponible al instante
-                en la web para que otro cliente lo tome.
+                Si un cliente cancela desde el sistema, el horario queda
+                liberado al instante en la web para que otro cliente lo tome.
               </p>
             </div>
           </div>
@@ -896,12 +897,12 @@
             <div
               class="flex items-center gap-2 text-brand-gold font-bold text-xs mb-1"
             >
-              <i class="fa-solid fa-calendar-minus"></i>
-              <h4>Bloqueo de Francos y Pausas</h4>
+              <i class="fa-solid fa-percent"></i>
+              <h4>Promociones por Días de la Semana</h4>
             </div>
             <p class="text-[11px] text-slate-300">
-              Bloqueá descansos de almuerzo, francos semanales o días festivos
-              de cualquier miembro del equipo en segundos.
+              Configurá descuentos automáticos (ej. 15% OFF los lunes o martes)
+              para llenar horarios valle con precios calculados en vivo.
             </p>
           </div>
 
@@ -935,12 +936,13 @@
             <div
               class="flex items-center gap-2 text-brand-gold font-bold text-xs mb-1"
             >
-              <i class="fa-solid fa-money-bill-transfer"></i>
-              <h4>Preparado para Cobro de Señas</h4>
+              <i class="fa-solid fa-business-time"></i>
+              <h4>Horarios Especiales por Día</h4>
             </div>
             <p class="text-[11px] text-slate-300">
-              Estructura lista para vincular pasarelas (ej. Mercado Pago) y
-              cobrar seña previa antes de confirmar el turno.
+              Definí aperturas tardías programadas (ej. lunes desde las 15:30
+              hs) bloqueando las franjas anteriores sin cancelar el resto del
+              día.
             </p>
           </div>
 
@@ -948,12 +950,12 @@
             <div
               class="flex items-center gap-2 text-brand-gold font-bold text-xs mb-1"
             >
-              <i class="fa-solid fa-file-invoice-dollar"></i>
-              <h4>Exportación de Reportes</h4>
+              <i class="fa-solid fa-calendar-xmark"></i>
+              <h4>Bloqueo de Días y Feriados</h4>
             </div>
             <p class="text-[11px] text-slate-300">
-              Descargá resúmenes de servicios y facturación para llevar la
-              contabilidad al día sin pérdidas de datos.
+              Bloqueá feriados, francos o fechas específicas para todo el
+              negocio o de forma individual para un barbero puntual en un clic.
             </p>
           </div>
 
@@ -961,12 +963,12 @@
             <div
               class="flex items-center gap-2 text-brand-gold font-bold text-xs mb-1"
             >
-              <i class="fa-solid fa-cloud-arrow-up"></i>
-              <h4>Backups Diarios en la Nube</h4>
+              <i class="fa-solid fa-user-plus"></i>
+              <h4>Alta de Barberos & Perfil Web</h4>
             </div>
             <p class="text-[11px] text-slate-300">
-              Toda tu agenda y caja se guardan con cifrado y copias continuas
-              sin riesgo de rotura de celular o pérdida física.
+              Creá accesos de sesión para nuevos profesionales, cargá sus fotos,
+              biografías, redes sociales y sus horarios de corte específicos.
             </p>
           </div>
         </div>
@@ -1738,15 +1740,15 @@
           icon: "fa-solid fa-mobile-screen-button",
           videoSrc: "videos/reserva.mp4",
           description:
-            "Tus clientes acceden desde tu Instagram o WhatsApp, eligen su profesional, servicio y horario en 10 segundos, sin descargar aplicaciones ni recordar contraseñas.",
+            "Tus clientes acceden desde tu Instagram o WhatsApp, eligen su barbero, servicio, fecha y horario en 10 segundos. Además pueden solicitar turnos fijos semanales y cancelar de forma autónoma con triple recordatorio por correo.",
         },
         barbero: {
-          title: "Planilla y Vista Móvil por Barbero",
+          title: "Planilla de Turnos & Carga Manual",
           subtitle: "Comodidad total para el equipo",
           icon: "fa-solid fa-id-badge",
           videoSrc: "videos/barbero.mp4",
           description:
-            "Cada profesional entra desde su celular a un link privado. Puede consultar su cronograma de turnos ordenados cronológicamente, ver el servicio a realizar, notas del cliente y marcar como completado.",
+            "Cada profesional entra a su planilla filtrada por fecha. Puede ver sus citas del día, cargar clientes que llegan sin turno previo, marcar cortes como completados y gestionar turnos fijos y normales.",
         },
         caja: {
           title: "Control de Caja Diaria & Gastos",
@@ -1765,20 +1767,20 @@
             "Definís el porcentaje de comisión para cada profesional (ej: 50%, 60% o fijo). AgenZa computa cada servicio finalizado y te muestra la liquidación acumulada lista para pagar a fin de semana o mes.",
         },
         servicios: {
-          title: "Catálogo de Servicios y Promociones",
-          subtitle: "Flexibilidad total de precios",
+          title: "Catálogo de Servicios & Tiempos",
+          subtitle: "Flexibilidad total de precios y tiempos",
           icon: "fa-solid fa-tags",
           videoSrc: "videos/servicios.mp4",
           description:
-            "Subí o bajá precios al instante, ajustá duraciones en minutos y activá banners de promociones temporales (como combos corte + barba en días valle) que impactan en vivo en la web de reservas.",
+            "Creá y editá servicios definiendo el monto y el tiempo estimado por profesional. Los horarios de la web se ajustan automáticamente a la duración de cada servicio para evitar esperas en la sala.",
         },
         clientes: {
-          title: "Base de Datos de Clientes",
-          subtitle: "Fidelización y control de visitas",
-          icon: "fa-solid fa-users",
-          videoSrc: "videos/clientes.mp4",
+          title: "Base de Clientes & Métricas del Salón",
+          subtitle: "Fidelización y estadísticas comerciales",
+          icon: "fa-solid fa-chart-pie",
+          videoSrc: "videos/barbero.mp4",
           description:
-            "Identificá automáticamente a tus clientes recurrentes frente a los ocasionales, con historial de fechas, barbero de preferencia y contacto directo para campañas de reactivación vía WhatsApp.",
+            "Panel de analítica comercial: conocé la cantidad de clientes del mes, detectá a los clientes frecuentes (+2 visitas mensuales) y descubrí cuál es el servicio más vendido de tu negocio.",
         },
       };
 
@@ -1809,17 +1811,6 @@
             `;
 
         document.getElementById("feature-modal").classList.remove("hidden");
-
-        // Forzar el arranque del video insertado dinámicamente: en algunos
-        // navegadores móviles (Safari/iOS en particular) un <video> agregado
-        // vía innerHTML no siempre autoplay-ea solo aunque tenga el atributo
-        // autoplay -- llamar a .play() explícitamente, en el mismo gesto de
-        // touch que abrió el modal, lo garantiza.
-        const insertedVideo = container.querySelector("video");
-        if (insertedVideo) {
-          insertedVideo.muted = true;
-          insertedVideo.play().catch(() => {});
-        }
       }
 
       function closeFeatureModal() {
